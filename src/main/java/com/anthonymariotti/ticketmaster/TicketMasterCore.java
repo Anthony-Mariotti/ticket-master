@@ -1,13 +1,31 @@
 package com.anthonymariotti.ticketmaster;
 
-import com.anthonymariotti.ticketmaster.utilities.TicketMasterLogger;
+import com.anthonymariotti.ticketmaster.configuration.TicketMasterConfigProvider;
+import com.anthonymariotti.ticketmaster.sql.database.TicketMasterMySql;
+import com.anthonymariotti.ticketmaster.sql.database.TicketMasterSqlite;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.loader.api.FabricLoader;
 
 public abstract class TicketMasterCore {
-	public void init() {
-		// This code runs as soon as Minecraft is in a mod-load-ready state.
-		// However, some things (like resources) may still be uninitialized.
-		// Proceed with mild caution.
+	public static final String MOD_ID = "ticketmaster";
 
-		// TicketMasterLogger.info("TicketMaster Logger Testing");
+	public static boolean isServer() {
+		return FabricLoader.getInstance()
+				.getEnvironmentType() == EnvType.SERVER;
+	}
+
+	public static boolean isClient() {
+		return FabricLoader.getInstance()
+				.getEnvironmentType() == EnvType.CLIENT;
+	}
+
+	public void init() {
+		TicketMasterConfigProvider.init();
+
+		if (TicketMasterConfigProvider.CONFIG.MYSQL.isEnabled()) {
+			TicketMasterMySql.init();
+		} else {
+			TicketMasterSqlite.init();
+		}
 	}
 }

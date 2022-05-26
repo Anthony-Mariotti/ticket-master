@@ -7,7 +7,7 @@ public class TicketMasterServer extends TicketMasterCore implements DedicatedSer
 
     @Override
     public void onInitializeServer() {
+        TicketMasterLogger.info("Initializing Ticket Master");
         super.init();
-        TicketMasterLogger.info("Initializing Ticket Master!");
     }
 }

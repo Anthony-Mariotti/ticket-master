@@ -14,7 +14,7 @@ public class TicketMasterLogger {
         LOGGER.info(message);
     }
 
-    public  static void error(Throwable e, String message) {
+    public static void error(Throwable e, String message) {
         LOGGER.error(message, e);
     }
 }
