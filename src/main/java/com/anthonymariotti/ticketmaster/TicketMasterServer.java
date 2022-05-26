@@ -1,0 +1,13 @@
+package com.anthonymariotti.ticketmaster;
+
+import com.anthonymariotti.ticketmaster.utilities.TicketMasterLogger;
+import net.fabricmc.api.DedicatedServerModInitializer;
+
+public class TicketMasterServer extends TicketMasterCore implements DedicatedServerModInitializer {
+
+    @Override
+    public void onInitializeServer() {
+        super.init();
+        TicketMasterLogger.info("Initializing Ticket Master!");
+    }
+}
